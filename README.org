@@ -1,0 +1,13 @@
+#+TITLE:  README for dev-env
+#+EMAIL:  jacob@conservify.org 
+
+* Developer Instructions 
+** Dependencies
+*** Linux
+   1) docker
+   2) build-essential
+   3) Arduino IDE
+   4) c++filt
+   5) golang-go 
+
+* EOF

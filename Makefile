@@ -5,7 +5,7 @@ modules=$(ROOT)/firmware-common $(ROOT)/example-module $(ROOT)/atlas $(ROOT)/wea
 default: all
 
 all: $(modules)
-	for d in $(modules); do     \
+	@for d in $(modules); do     \
 		(cd $$d && make);   \
 	done
 
@@ -18,6 +18,9 @@ $(ROOT)/firmware-common:
 $(ROOT)/example-module:
 	git clone git@github.com:fieldkit/firmware-common.git $(ROOT)/example-module
 
+$(ROOT)/sonar:
+	git clone git@github.com:fieldkit/sonar.git $(ROOT)/sonar
+
 $(ROOT)/weather:
 	git clone git@github.com:fieldkit/atlas.git $(ROOT)/weather
 
@@ -28,16 +31,22 @@ $(ROOT)/cloud:
 	cd $(ROOT)/cloud && go get ./...
 
 clean: $(modules)
-	for d in $(modules); do           \
+	@for d in $(modules); do           \
 		(cd $$d && make clean);   \
 	done
 
 veryclean: clean
-	for d in $(modules); do              \
+	@for d in $(modules); do              \
 		(cd $$d && git clean -d -f); \
 	done
 
-status:
-	for d in $(modules); do      \
-		./branch-status.sh $$d;   \
+status: $(modules)
+	@for d in $(modules); do           \
+		(cd $$d && git fetch);        \
+		./branch-status.sh $$d;       \
+	done
+
+pull: $(modules)
+	@for d in $(modules); do           \
+		(cd $$d && git pull);         \
 	done
