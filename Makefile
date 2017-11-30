@@ -1,6 +1,6 @@
 ROOT=..
 
-modules=$(ROOT)/firmware-common $(ROOT)/example-module $(ROOT)/atlas $(ROOT)/weather $(ROOT)/module-protocol $(ROOT)/app-protocol $(ROOT)/sonar $(ROOT)/core $(ROOT)/cloud
+modules=$(ROOT)/firmware-common $(ROOT)/example-module $(ROOT)/atlas $(ROOT)/weather $(ROOT)/module-protocol $(ROOT)/app-protocol $(ROOT)/sonar $(ROOT)/core $(ROOT)/cloud $(ROOT)/app
 
 default: all
 
@@ -52,3 +52,6 @@ $(ROOT)/weather:
 
 $(ROOT)/atlas:
 	git clone git@github.com:fieldkit/atlas.git $@
+
+$(ROOT)/app:
+	git clone git@github.com:fieldkit/app.git $@
