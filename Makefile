@@ -19,7 +19,7 @@ clean: $(modules)
 
 veryclean: clean
 	@for d in $(modules); do                    \
-		(cd $$d && git clean -d -f) || exit 1;  \
+		(cd $$d && make veryclean) || exit 1;   \
 	done
 
 status: $(modules)
