@@ -1,5 +1,6 @@
 #!/bin/bash
 
+master_only=1
 folder=""
 if [ ! -z $1 ]; then
     cd $1
@@ -35,6 +36,11 @@ do
         master="origin/master"
         if [ $branch == $master ]; then
             continue
+        fi
+        if [ $master_only == 1 ]; then
+            if [ $branch != "master" ]; then
+                continue
+            fi
         fi
         git rev-list --left-right ${branch}...${master} -- 2>/dev/null >/tmp/git_upstream_status_delta || continue
         LEFT_AHEAD=$(grep -c '^<' /tmp/git_upstream_status_delta)
