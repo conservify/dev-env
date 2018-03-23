@@ -1,6 +1,6 @@
 ROOT=..
 
-modules=$(ROOT)/firmware-common $(ROOT)/example-module $(ROOT)/fkfs $(ROOT)/atlas $(ROOT)/weather $(ROOT)/naturalist $(ROOT)/module-protocol $(ROOT)/data-protocol $(ROOT)/app-protocol $(ROOT)/sonar $(ROOT)/core $(ROOT)/cloud $(ROOT)/app $(ROOT)/testing
+modules=$(ROOT)/firmware-common $(ROOT)/example-module $(ROOT)/fkfs $(ROOT)/atlas $(ROOT)/weather $(ROOT)/naturalist $(ROOT)/module-protocol $(ROOT)/data-protocol $(ROOT)/app-protocol $(ROOT)/sonar $(ROOT)/core $(ROOT)/cloud $(ROOT)/testing $(ROOT)/app
 
 default: $(ROOT)/bin all
 
