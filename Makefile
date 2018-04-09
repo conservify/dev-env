@@ -41,6 +41,7 @@ pull: $(modules)
 install: $(modules)
 	(cd $(ROOT)/testing && INSTALLDIR=$(ROOT)/bin make install)
 	(cd $(ROOT)/app-protocol && INSTALLDIR=$(ROOT)/bin make install)
+	(cd $(ROOT)/fkfs && INSTALLDIR=$(ROOT)/bin make install)
 	(cd $(ROOT)/cloud && INSTALLDIR=$(ROOT)/bin make install)
 
 $(ROOT)/firmware-common:
