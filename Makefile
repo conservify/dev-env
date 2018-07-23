@@ -1,6 +1,6 @@
 ROOT=..
 
-modules=$(ROOT)/module-protocol $(ROOT)/data-protocol $(ROOT)/app-protocol $(ROOT)/fkfs $(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/enhanced-io $(ROOT)/simple-lora-comms $(ROOT)/firmware-common $(ROOT)/example-module $(ROOT)/atlas $(ROOT)/weather $(ROOT)/naturalist $(ROOT)/sonar $(ROOT)/core $(ROOT)/fona $(ROOT)/cloud $(ROOT)/testing $(ROOT)/app
+modules=$(ROOT)/module-protocol $(ROOT)/data-protocol $(ROOT)/app-protocol $(ROOT)/fkfs $(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/lwcron $(ROOT)/enhanced-io $(ROOT)/simple-lora-comms $(ROOT)/firmware-common $(ROOT)/example-module $(ROOT)/atlas $(ROOT)/weather $(ROOT)/naturalist $(ROOT)/sonar $(ROOT)/core $(ROOT)/fona $(ROOT)/cloud $(ROOT)/testing $(ROOT)/app
 
 default: $(ROOT)/bin all
 
@@ -34,6 +34,7 @@ push: $(modules)
 	done
 
 pull: $(modules)
+	git pull
 	@for d in $(modules); do                      \
 		(cd $$d && echo $$d && git pull) || exit 1; \
 	done
