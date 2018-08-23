@@ -1,6 +1,6 @@
 ROOT=..
 
-modules=$(ROOT)/bootloaders $(ROOT)/module-protocol $(ROOT)/data-protocol $(ROOT)/app-protocol $(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/lwcron $(ROOT)/enhanced-io $(ROOT)/simple-lora-comms $(ROOT)/firmware-common $(ROOT)/example-module $(ROOT)/atlas $(ROOT)/weather $(ROOT)/naturalist $(ROOT)/sonar $(ROOT)/core $(ROOT)/fona $(ROOT)/cloud $(ROOT)/testing $(ROOT)/app
+modules=$(ROOT)/cmake $(ROOT)/bootloaders $(ROOT)/module-protocol $(ROOT)/data-protocol $(ROOT)/app-protocol $(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/lwcron $(ROOT)/enhanced-io $(ROOT)/simple-lora-comms $(ROOT)/firmware-common $(ROOT)/example-module $(ROOT)/atlas $(ROOT)/weather $(ROOT)/naturalist $(ROOT)/sonar $(ROOT)/core $(ROOT)/fona $(ROOT)/cloud $(ROOT)/testing $(ROOT)/app
 
 default: $(ROOT)/bin all
 
