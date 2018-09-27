@@ -14,9 +14,6 @@ all: $(modules)
 		(cd $$d && $(MAKE)) || exit 1;              \
 	done
 
-deps:
-	cd $(ROOT)/cloud && go get ./...
-
 clean: $(modules)
 	+@for d in $(modules); do                     \
 		(cd $$d && $(MAKE) clean) || exit 1;        \
@@ -27,22 +24,19 @@ veryclean: clean
 		(cd $$d && $(MAKE) veryclean) || exit 1;    \
 	done
 
-status: $(modules)
-	+@for d in $(modules); do                     \
-		(cd $$d && git fetch) || exit 1;            \
-		./branch-status.sh $$d || exit 1;           \
-	done
+status:
+	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice ./branch-status.sh %
 
 push: $(modules)
-	+@for d in $(modules); do                     \
-		(cd $$d && git push) || exit 1;             \
-	done
+	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice GIT_DIR=%/.git git push
+
+fetch: $(modules)
+	git fetch
+	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice GIT_DIR=%/.git git fetch
 
 pull: $(modules)
 	git pull
-	+@for d in $(modules); do                     \
-		(cd $$d && echo $$d && git pull) || exit 1; \
-	done
+	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice GIT_DIR=%/.git git pull
 
 test: $(modules)
 	@for d in fkfs phylum firmware-common; do     \
