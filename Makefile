@@ -28,15 +28,15 @@ status:
 	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice ./branch-status.sh %
 
 push: $(modules)
-	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice GIT_DIR=%/.git git push
+	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git push"
 
 fetch: $(modules)
 	git fetch
-	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice GIT_DIR=%/.git git fetch
+	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git fetch"
 
 pull: $(modules)
 	git pull
-	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice GIT_DIR=%/.git git pull
+	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git pull"
 
 test: $(modules)
 	@for d in fkfs phylum firmware-common; do     \
