@@ -7,6 +7,8 @@ if [ ! -z $1 ]; then
     folder=`basename $1`
 fi
 
+temp_file=$(mktemp)
+
 git for-each-ref --format="%(refname) %(refname:short) %(upstream:short)" refs/ | \
 while read name local remote
 do
@@ -42,9 +44,9 @@ do
                 continue
             fi
         fi
-        git rev-list --left-right ${branch}...${master} -- 2>/dev/null >/tmp/git_upstream_status_delta || continue
-        LEFT_AHEAD=$(grep -c '^<' /tmp/git_upstream_status_delta)
-        RIGHT_AHEAD=$(grep -c '^>' /tmp/git_upstream_status_delta)
+        git rev-list --left-right ${branch}...${master} -- 2>/dev/null >${temp_file} || continue
+        LEFT_AHEAD=$(grep -c '^<' ${temp_file})
+        RIGHT_AHEAD=$(grep -c '^>' ${temp_file})
         printf "%s (ahead %s) | (behind %s) %s %-16s%s\n" $branch $LEFT_AHEAD $RIGHT_AHEAD $master $folder $mods
     done
 done
