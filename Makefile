@@ -11,17 +11,17 @@ default: $(ROOT)/bin all
 
 all: $(modules)
 	+@for d in $(modules); do                     \
-		(cd $$d && $(MAKE)) || exit 1;              \
+    $(MAKE) -C $$d || exit 1;                   \
 	done
 
 clean: $(modules)
 	+@for d in $(modules); do                     \
-		(cd $$d && $(MAKE) clean) || exit 1;        \
+    $(MAKE) -C $$d clean || exit 1;             \
 	done
 
 veryclean: clean
 	+@for d in $(modules); do                     \
-		(cd $$d && $(MAKE) veryclean) || exit 1;    \
+    $(MAKE) -C $$d veryclean || exit 1;         \
 	done
 
 status:
