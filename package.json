@@ -1,0 +1,23 @@
+{
+  "name": "dev-env",
+  "version": "1.0.0",
+  "description": "* Developer Instructions  ** Dependencies *** Linux    1) docker    2) build-essential    3) Arduino IDE    4) c++filt    5) golang-go",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conservify/dev-env.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/conservify/dev-env/issues"
+  },
+  "homepage": "https://github.com/conservify/dev-env#readme",
+  "dependencies": {
+    "expo-cli": "^2.15.4",
+    "vue-native-cli": "0.0.6"
+  }
+}
