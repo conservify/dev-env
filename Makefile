@@ -28,7 +28,7 @@ status:
 	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice ./branch-status.sh %
 
 push: $(modules)
-	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git push --tags"
+	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git push && git push --tags"
 
 fetch: $(modules)
 	git fetch
