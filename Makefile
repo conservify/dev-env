@@ -5,7 +5,7 @@ modules=$(ROOT)/cmake $(ROOT)/bootloaders \
 	$(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/lwcron $(ROOT)/enhanced-io $(ROOT)/simple-lora-comms \
 	$(ROOT)/firmware-common $(ROOT)/core $(ROOT)/naturalist \
 	$(ROOT)/example-module $(ROOT)/atlas $(ROOT)/weather $(ROOT)/sonar \
-	$(ROOT)/cloud $(ROOT)/testing $(ROOT)/app
+	$(ROOT)/cloud $(ROOT)/testing $(ROOT)/fkn-app
 
 default: $(ROOT)/bin all
 
