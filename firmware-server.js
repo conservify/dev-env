@@ -39,6 +39,21 @@ app.get("/:deviceId/fkbl-fkb.bin", bootloaderFirmware);
 app.get("/fk-bundled-fkb.bin", applicationFirmware);
 app.get("/fkbl-fkb.bin", bootloaderFirmware);
 
+app.post("/upload", (req, res) => {
+    let received = 0;
+
+    req.on('data', (chunk) => { 
+        received += chunk.length;
+    });
+
+    req.on('end', () => {
+        console.log('received', received, 'bytes');
+    })
+
+    res.status(200).send("ok");
+
+});
+
 app.get("*", (req, res, n) => {
     res.status(404).send("404 not found");
 });
