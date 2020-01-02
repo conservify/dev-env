@@ -1,12 +1,11 @@
 ROOT=..
 
-modules=$(ROOT)/cmake $(ROOT)/bootloaders \
-	$(ROOT)/module-protocol $(ROOT)/data-protocol $(ROOT)/app-protocol \
-	$(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/lwcron $(ROOT)/enhanced-io $(ROOT)/simple-lora-comms \
+modules=$(ROOT)/cmake \
+	$(ROOT)/data-protocol $(ROOT)/app-protocol \
+	$(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/lwcron $(ROOT)/enhanced-io \
 	$(ROOT)/arduino-osh $(ROOT)/loading \
-	$(ROOT)/firmware $(ROOT)/firmware-common $(ROOT)/core $(ROOT)/naturalist \
-	$(ROOT)/example-module $(ROOT)/atlas $(ROOT)/weather $(ROOT)/sonar \
-	$(ROOT)/cloud $(ROOT)/testing $(ROOT)/fkn-app
+	$(ROOT)/firmware \
+	$(ROOT)/cloud $(ROOT)/testing $(ROOT)/app
 
 default: $(ROOT)/bin all
 
