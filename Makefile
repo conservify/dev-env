@@ -37,19 +37,19 @@ $(MODULES_VERYCLEAN_TARGETS):
 status:
 	@echo $(MODULES) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice ./branch-status.sh %
 
-push: $(MODULES)
+push:
 	@echo $(MODULES) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git push && git push --tags"
 
-fetch: $(MODULES)
+fetch:
 	git fetch
 	@echo $(MODULES) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git fetch"
 
-pull: $(MODULES)
+pull:
 	git pull
 	@echo $(MODULES) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git pull"
 
-test: $(MODULES)
-	@for d in fkfs phylum firmware-common; do     \
+test:
+	@for d in arduino-logging lwcron arduino-osh phylum firmware; do     \
 		(cd $(ROOT)/$$d && echo $$d && $(MAKE) test) || exit 1; \
 	done
 
