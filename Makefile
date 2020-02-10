@@ -1,6 +1,6 @@
-ROOT=..
-
-modules=$(ROOT)/cmake \
+ROOT = $(shell pwd)/..
+MODULES = \
+	$(ROOT)/cmake \
 	$(ROOT)/data-protocol $(ROOT)/app-protocol $(ROOT)/atlas-protocol \
 	$(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/lwcron $(ROOT)/enhanced-io \
 	$(ROOT)/arduino-osh $(ROOT)/loading \
@@ -9,62 +9,54 @@ modules=$(ROOT)/cmake \
 
 default: $(ROOT)/bin all
 
-all: $(modules)
-	+@for d in $(modules); do                     \
-    $(MAKE) -C $$d || exit 1;                   \
-	done
+.PHONY: $(MODULES)
 
-clean: $(modules)
-	+@for d in $(modules); do                     \
-    $(MAKE) -C $$d clean || exit 1;             \
-	done
+all: $(MODULES)
 
-veryclean: clean
-	+@for d in $(modules); do                     \
-    $(MAKE) -C $$d veryclean || exit 1;         \
-	done
+$(MODULES):
+	$(MAKE) -C $@
+
+MODULES_CLEAN_TARGETS = $(MODULES:%=clean-%)
+
+.PHONY: $(MODULES_CLEAN_TARGETS)
+
+clean: $(MODULES_CLEAN_TARGETS)
+
+$(MODULES_CLEAN_TARGETS):
+	$(MAKE) -C $(@:clean-%=%) clean
+
+.PHONY: $(MODULES_VERYCLEAN_TARGETS)
+
+MODULES_VERYCLEAN_TARGETS = $(MODULES:%=veryclean-%)
+
+veryclean: $(MODULES_VERYCLEAN_TARGETS)
+
+$(MODULES_VERYCLEAN_TARGETS):
+	$(MAKE) -C $(@:veryclean-%=%) veryclean
 
 status:
-	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice ./branch-status.sh %
+	@echo $(MODULES) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice ./branch-status.sh %
 
-push: $(modules)
-	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git push && git push --tags"
+push: $(MODULES)
+	@echo $(MODULES) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git push && git push --tags"
 
-fetch: $(modules)
+fetch: $(MODULES)
 	git fetch
-	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git fetch"
+	@echo $(MODULES) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git fetch"
 
-pull: $(modules)
+pull: $(MODULES)
 	git pull
-	@echo $(modules) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git pull"
+	@echo $(MODULES) | xargs -n1 | parallel -k -I% --max-args=1 --no-notice "cd % && git pull"
 
-test: $(modules)
+test: $(MODULES)
 	@for d in fkfs phylum firmware-common; do     \
 		(cd $(ROOT)/$$d && echo $$d && $(MAKE) test) || exit 1; \
 	done
 
-install: $(modules)
+install: $(MODULES)
 	@for d in testing app-protocol fkfs cloud; do \
 		(cd $(ROOT)/$$d && echo $$d && INSTALLDIR=$(ROOT)/bin $(MAKE) install) || exit 1; \
 	done
-
-$(ROOT)/firmware-common:
-	git clone git@github.com:fieldkit/firmware-common.git $@
-
-$(ROOT)/example-module:
-	git clone git@github.com:fieldkit/firmware-common.git $@
-
-$(ROOT)/sonar:
-	git clone git@github.com:fieldkit/sonar.git $@
-
-$(ROOT)/weather:
-	git clone git@github.com:fieldkit/atlas.git $@
-
-$(ROOT)/atlas:
-	git clone git@github.com:fieldkit/atlas.git $@
-
-$(ROOT)/app:
-	git clone git@github.com:fieldkit/app.git $@
 
 $(ROOT)/bin:
 	mkdir -p $(ROOT)/bin
