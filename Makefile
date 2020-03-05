@@ -2,6 +2,7 @@ ROOT = $(shell pwd)/..
 MODULES = \
 	$(ROOT)/cmake \
 	$(ROOT)/data-protocol $(ROOT)/app-protocol $(ROOT)/atlas-protocol \
+	$(ROOT)/fkc \
 	$(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/lwcron $(ROOT)/enhanced-io \
 	$(ROOT)/arduino-osh $(ROOT)/loading \
 	$(ROOT)/firmware \
