@@ -6,7 +6,7 @@ MODULES = \
 	$(ROOT)/phylum $(ROOT)/arduino-logging $(ROOT)/lwstreams $(ROOT)/lwcron $(ROOT)/enhanced-io \
 	$(ROOT)/arduino-osh $(ROOT)/loading \
 	$(ROOT)/firmware \
-	$(ROOT)/cloud $(ROOT)/testing $(ROOT)/app
+	$(ROOT)/cloud $(ROOT)/testing $(ROOT)/mobile
 
 default: $(ROOT)/bin all
 
