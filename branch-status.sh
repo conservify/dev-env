@@ -1,6 +1,6 @@
 #!/bin/bash
 
-master_only=1
+main_only=1
 folder=""
 if [ ! -z $1 ]; then
     cd $1
@@ -35,18 +35,18 @@ do
     fi
 
     for branch in ${branches[@]}; do
-        master="origin/master"
-        if [ $branch == $master ]; then
+        main="origin/main"
+        if [ $branch == $main ]; then
             continue
         fi
-        if [ $master_only == 1 ]; then
-            if [ $branch != "master" ]; then
+        if [ $main_only == 1 ]; then
+            if [ $branch != "main" ]; then
                 continue
             fi
         fi
-        git rev-list --left-right ${branch}...${master} -- 2>/dev/null >${temp_file} || continue
+        git rev-list --left-right ${branch}...${main} -- 2>/dev/null >${temp_file} || continue
         LEFT_AHEAD=$(grep -c '^<' ${temp_file})
         RIGHT_AHEAD=$(grep -c '^>' ${temp_file})
-        printf "%s (ahead %s) | (behind %s) %s %-16s%s\n" $branch $LEFT_AHEAD $RIGHT_AHEAD $master $folder $mods
+        printf "%s (ahead %s) | (behind %s) %s %-16s%s\n" $branch $LEFT_AHEAD $RIGHT_AHEAD $main $folder $mods
     done
 done
